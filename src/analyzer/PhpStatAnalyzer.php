@@ -1,3 +1,5 @@
+<?php
+
 namespace nurazlib\phpstat\analyzer;
 
 use PhpParser\ParserFactory;
