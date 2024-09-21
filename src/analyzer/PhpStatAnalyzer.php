@@ -4,9 +4,9 @@ namespace nurazlib\phpstat\analyzer;
 
 use PhpParser\ParserFactory;
 use PhpParser\NodeTraverser;
-use nurazlib\phpstat\Rules\TypeCheckingRule;
-use nurazlib\phpstat\Rules\CyclomaticComplexityRule;
-use nurazlib\phpstat\Rules\DeadCodeRule;
+use nurazlib\phpstat\rules\TypeCheckingRule;
+use nurazlib\phpstat\rules\CyclomaticComplexityRule;
+use nurazlib\phpstat\rules\DeadCodeRule;
 
 class PhpStatAnalyzer
 {
