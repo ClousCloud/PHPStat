@@ -1,3 +1,5 @@
+<?php
+
 namespace nurazlib\phpstat\rules;
 
 use PhpParser\Node;
