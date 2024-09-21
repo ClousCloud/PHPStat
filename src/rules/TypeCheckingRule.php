@@ -1,6 +1,6 @@
 <?php
 
-namespace Nurazlib\PHPStat\Rules;
+namespace nurazlib\phpstat\rules;
 
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
