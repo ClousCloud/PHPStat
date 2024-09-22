@@ -1,5 +1,4 @@
 <?php
-
 namespace nurazlib\phpstat\rules;
 
 use PhpParser\Node;
@@ -10,25 +9,25 @@ class DeadCodeRule extends NodeVisitorAbstract
     private $variableUsages = [];
     private $declaredVariables = [];
 
-    // Ketika memasuki sebuah node (seperti fungsi, metode, atau blok lainnya)
+    // When entering a node (like a function, method, or other block)
     public function enterNode(Node $node)
     {
-        // Jika node adalah deklarasi variabel
+        // If the node is a variable declaration
         if ($node instanceof Node\Expr\Assign && $node->var instanceof Node\Expr\Variable) {
             $variableName = $node->var->name;
 
-            // Pastikan variabel yang dideklarasikan adalah string (nama variabel yang valid)
+            // Ensure the declared variable is a string (valid variable name)
             if (is_string($variableName)) {
                 $this->declaredVariables[$variableName] = $node->getLine();
                 echo "Variable declared: $" . $variableName . " at line " . $node->getLine() . "\n";
             }
         }
 
-        // Jika variabel digunakan di tempat lain dalam kode
+        // If the variable is used elsewhere in the code
         if ($node instanceof Node\Expr\Variable) {
             $variableName = $node->name;
 
-            // Pastikan variabel yang digunakan adalah string (nama variabel yang valid)
+            // Ensure the used variable is a string (valid variable name)
             if (is_string($variableName)) {
                 $this->variableUsages[$variableName][] = $node->getLine();
                 echo "Variable used: $" . $variableName . " at line " . $node->getLine() . "\n";
@@ -36,12 +35,12 @@ class DeadCodeRule extends NodeVisitorAbstract
         }
     }
 
-    // Ketika traversal selesai, kita bisa memeriksa variabel yang tidak digunakan
+    // When traversal is finished, we can check for unused variables
     public function afterTraverse(array $nodes)
     {
         foreach ($this->declaredVariables as $variable => $declarationLine) {
             if (!isset($this->variableUsages[$variable])) {
-                // Variabel yang dideklarasikan tapi tidak digunakan
+                // Variable declared but never used
                 echo "Warning: Variable $" . $variable . " declared at line " . $declarationLine . " is never used.\n";
             }
         }
